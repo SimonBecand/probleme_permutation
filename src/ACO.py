@@ -2,7 +2,7 @@ import numpy as np
 from numpy import inf 
 from numpy import random
 import random
-from echange import echange
+from recherche_locale_permutation import echange
 from recherche_locale_insertion import recherche_local_insertion
 from score import score
 
