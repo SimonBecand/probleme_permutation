@@ -2,7 +2,9 @@ import numpy as np
 from numpy import inf 
 from numpy import random
 import random
-
+from echange import echange
+from recherche_locale_insertion import recherche_local_insertion
+from score import score
 
 
 
@@ -196,18 +198,6 @@ M_original=np.array([[1,2,3,4,5],
 
 
 
-
-def score(Pi,M):
-    s=0
-    n=len(Pi)
-    for i in range(n):
-        for j in range (i+1,n):
-            indice_i=Pi[i]-1
-            indice_j=Pi[j]-1
-            s+=M[indice_i,indice_j]
-    return s
-
-
 def glouton(M):
     dictionnaire_score = {}
     for i in range (len(M)):
@@ -363,8 +353,9 @@ print(score_pheromones(P))
 
 
 
-def ACO(M_original,n_fourmis,n_iterations,alpha,betha,gamma):
-
+def ACO(M_original,n_fourmis,n_iterations,alpha,betha,gamma,recherche_locale=None):
+    '''recherche_locale = ["None","echange","insertion"]
+    '''
     M_avec_coeff=np.copy(M_original)
     score_max = 0
     best_Pi = []
@@ -388,7 +379,14 @@ def ACO(M_original,n_fourmis,n_iterations,alpha,betha,gamma):
                 choix_colonne = choix_prochaine_colonne(M,copyP,alpha,betha)
                 Pi.append(choix_colonne)
                 M,copyP=modification_apres_choix(M,copyP,choix_colonne)
-            Pis.append(Pi)
+            
+            if recherche_locale == "insertion":
+                Pi_voisin= recherche_locale_insertion(M_original,Pi)(0)
+            elif recherche_locale == "echange":
+                Pi_voisin = echange(M_original,Pi)(0)
+            else:
+                Pi_voisin = Pi
+            Pis.append(Pi_voisin)
 
         P,score_fourmis, meilleur_fourmi = ajout_pheromones(Pis,P,gamma,M_original)
         if score_fourmis > score_max:
