@@ -5,6 +5,7 @@ import random
 from recherche_locale_permutation import echange
 from recherche_locale_insertion import recherche_local_insertion
 from score import score
+from matrice import charger_instance_lop
 
 
 
