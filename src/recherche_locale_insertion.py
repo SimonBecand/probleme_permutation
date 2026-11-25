@@ -4,7 +4,7 @@ from numpy import inf
 from numpy import random
 import random
 
-def recherche_local_insertion(M,Pi_original):
+def recherche_local_insertion(Pi_original,M):
     best=score(Pi_original,M)
     best_Pi=Pi_original
     for i in range(len(Pi_original)):

@@ -191,9 +191,9 @@ def ACO(M_original,n_fourmis,n_iterations,alpha,betha,gamma,recherche_locale=Non
                 M,copyP=modification_apres_choix(M,copyP,choix_colonne)
             
             if recherche_locale == "insertion":
-                Pi_voisin= recherche_locale_insertion(M_original,Pi)(0)
+                Pi_voisin= recherche_local_insertion(Pi,M_original)(0)
             elif recherche_locale == "echange":
-                Pi_voisin = echange(M_original,Pi)(0)
+                Pi_voisin = echange(Pi,M_original)(0)
             else:
                 Pi_voisin = Pi
             Pis.append(Pi_voisin)
@@ -214,12 +214,4 @@ alpha=0.7
 n_fourmis = 1000
 n_itération = 100
 
-C = INSTANCES["D8_n12"]["C"]
-optimum = INSTANCES["D8_n12"]["optimal_value"]
-solution = INSTANCES["D8_n12"]["optimal_permutation"]
-PI_np,score_max = ACO(C,n_fourmis,n_itération,alpha,beta,gamma)
-PI=liste = [int(x)-1 for x in PI_np]
-print("Meilleure permutation trouvée :", PI)
-print("Score de la meilleure permutation :", score_max)
-print("score théorique optimum :", optimum)
 
