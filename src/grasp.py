@@ -1,5 +1,7 @@
 import numpy as np
 import random
+from recherche_locale_insertion import recherche_local_insertion
+from recherche_locale_permutation import echange
 
 
 
@@ -12,8 +14,8 @@ def grasp(M_original,nb_iterations):
         s=+np.inf
         
         while score(pi,M_original)<s:
-            if recherche_locale_insertion(pi,M_original)[1]>echange(pi,M_original)[1]:
-                pi,s=recherche_locale_insertion(pi,M_original)
+            if recherche_local_insertion(pi,M_original)[1]>echange(pi,M_original)[1]:
+                pi,s=recherche_local_insertion(pi,M_original)
             else:
                 pi,s=echange(pi,M_original)           
             
