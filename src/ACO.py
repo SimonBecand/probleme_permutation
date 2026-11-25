@@ -275,7 +275,7 @@ def choix_prochaine_colonne(M,P,alpha,beta):
     poids = []
 
     for c in candidat :
-        poids.append((score1[c]**alpha)*(score2[c]**beta))
+        poids.append((score1[c]**beta)*(score2[c]**alpha))
 
     colonne = random.choices(candidat, weights=poids, k=1)[0]
     return colonne
@@ -401,7 +401,7 @@ def ACO(M_original,n_fourmis,n_iterations,alpha,betha,gamma):
 
 
 gamma= 0.8
-beta=0.2
+beta=0.6
 alpha=0.7
 n_fourmis = 1000
 n_itération = 100
